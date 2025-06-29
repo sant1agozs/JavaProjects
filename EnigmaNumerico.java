@@ -1,46 +1,58 @@
-import java.io.BufferedReader;        
-import java.io.InputStreamReader;      
-import java.io.PrintStream;               
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 
-public class App {                        
+public class App {
+  static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+  static PrintStream out = System.out;
 
-  static BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
-  static PrintStream out = System.out;  
+  public static void main(String[] args) throws Exception {
+    String entradaUsuario = "";
+    int numero = 0;
+    boolean acertado = false;
+    int intentos = 1;
+    boolean entradaValida = false;
 
-  public static void main(String[] args) throws Exception {  
+    out.println("Una puerta mágica bloquea tu paso. Un enigma está grabado sobre ella:");
+    out.println("\"Soy mayor que 10, menor que 20 y divisible por 3.\"");
+    out.println("Tienes 3 intentos para descubrir el número correcto.");
 
-    String entradaUsuario = "";         // Variable para guardar lo que el usuario escribe (en forma de texto)
-    int numeroIngresado = 0;            // Variable para almacenar el número ingresado por el usuario (una vez convertido)
-    String mensaje = "";                // Variable que guardará el resultado final a mostrar (correcto o incorrecto)
-
-    // Presentación del acertijo al usuario
-    out.println("Te encuentras frente a una puerta con un enigma:");
-    out.println("\"Soy mayor que 10, menor que 20 y divisible por 3. ¿Qué número soy?\"");
-
-    // Bucle para asegurar que el usuario solo ingrese números enteros positivos (no letras ni símbolos)
     do {
-      out.print("Ingresa tu respuesta numérica: ");          // Se solicita al usuario que escriba su respuesta
-      entradaUsuario = in.readLine();                        // Se lee la línea completa que el usuario escribe
+      out.print("Intento #" + intentos + " - Ingresa tu número: ");
+      entradaUsuario = in.readLine();
 
-      // Validación con expresión regular: si no son dígitos (números del 0 al 9), muestra mensaje de error
-      if (!entradaUsuario.matches("\\d+")) {
-        out.println("Entrada inválida. Solo se permiten números enteros positivos.");
+      // Validación manual de un valor numerico positivo
+      entradaValida = entradaUsuario.matches("\\d+");
+
+      if (entradaValida) {
+        numero = Integer.parseInt(entradaUsuario);
+
+        if (numero == 12 || numero == 15 || numero == 18) {
+          out.println("¡Correcto! La puerta se abre lentamente y puedes avanzar.");
+          acertado = true;
+        } else {
+          out.println("Incorrecto. Esa no es la clave que abre la puerta.");
+
+          // Pista si está cerca del rango correcto
+          if (numero > 10 && numero < 20) {
+            out.println("Pista: Vas por buen camino. Recuerda que debe ser divisible entre 3.");
+          }
+
+          out.println("Intentos restantes: " + (3 - intentos));
+          intentos++;
+        }
+
+      } else {
+        out.println("Entrada inválida. Solo puedes ingresar números enteros positivos.");
+        out.println("Intento no válido. Aún tienes " + (3 - intentos + 1) + " intento(s).");
+        // No se incrementa el contador si la entrada no fue válida
       }
 
-    } while (!entradaUsuario.matches("\\d+"));                // Se repite mientras la entrada no sea un número válido
+    } while (!acertado && intentos <= 3);
 
-    // Conversión de la cadena de texto ingresada a un número entero (ya se validó que es seguro)
-    numeroIngresado = Integer.parseInt(entradaUsuario);
-
-    // Validación del número según las condiciones del acertijo (mayor que 10, menor que 20, divisible entre 3)
-    // Los únicos valores que cumplen con eso son 12, 15 y 18
-    if (numeroIngresado == 12 || numeroIngresado == 15 || numeroIngresado == 18) {
-      mensaje = "¡Correcto! La puerta se abre lentamente.";   // Mensaje para respuesta correcta
-    } else {
-      mensaje = "Incorrecto. La puerta permanece cerrada.";   // Mensaje para respuesta incorrecta
+    if (!acertado) {
+      out.println("Has agotado todos los intentos.");
+      out.println("La puerta permanece cerrada! Intentalo de nuevo.");
     }
-
-    // Se imprime el mensaje final en pantalla (resultado del acertijo)
-    out.println(mensaje);
   }
 }

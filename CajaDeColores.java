@@ -11,6 +11,7 @@ public class App {
     String respuesta = "";
     boolean tieneLlave = false; // Valor boolean para otorgar una llave si el usuario adivina el mini-acertijo
     boolean entradaValida = false;
+    int Contador = 1;
 
     // Instrucciones iniciales
     out.println("Estás frente a una caja con tres botones: rojo, azul y verde.");
@@ -24,17 +25,18 @@ public class App {
 
       if (!entradaValida) {
         out.println("Entrada inválida. Solo puedes elegir: rojo, azul o verde.");
+        out.println("Intentos restantes: " + (5 - Contador));   
+      } else if (colorElegido.equalsIgnoreCase("rojo") || colorElegido.equalsIgnoreCase("verde")) {
+        out.println("¡Error! El valor ingresado es incorrecto, intentos restantes: " + (5 - Contador)); 
+      } else if (colorElegido.equalsIgnoreCase("azul")) {
+        out.println("¡Has elegido el color correcto! Has encontrado una llave en la caja"); // Mensaje de éxito si el color es azul
+        entradaValida = true; // Salimos del bucle si la entrada es válida
       }
-    } while (!entradaValida);
-
-    // Lógica de juego
-    if (colorElegido.equalsIgnoreCase("azul")) {
-      respuesta = "¡Correcto! Has encontrado una llave en la caja.";
-      tieneLlave = true;
-    } else {
-      respuesta = "¡Error! Has recibido una descarga leve."; // Fin del juego
-    }
-
-    out.println(respuesta);
+      Contador++;
+    } while (Contador <= 5); // Permite hasta 5 intentos
+    
+    if (Contador > 5) {
+      out.println("Has agotado tus intentos. Fin del juego.");
+    }    
   }
 }

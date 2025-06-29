@@ -27,7 +27,7 @@ public class App {
         out.println("Entrada inválida. Solo puedes elegir: rojo, azul o verde.");
         out.println("Intentos restantes: " + (5 - Contador));   
       } else if (colorElegido.equalsIgnoreCase("rojo") || colorElegido.equalsIgnoreCase("verde")) {
-        out.println("¡Error! El valor ingresado es incorrecto, intentos restantes: " + (5 - Contador)); 
+        out.println("¡Error! El color ingresado es incorrecto, intentos restantes: " + (5 - Contador)); 
       } else if (colorElegido.equalsIgnoreCase("azul")) {
         out.println("¡Has elegido el color correcto! Has encontrado una llave en la caja"); // Mensaje de éxito si el color es azul
         entradaValida = true; // Salimos del bucle si la entrada es válida

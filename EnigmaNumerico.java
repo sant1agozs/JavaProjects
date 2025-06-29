@@ -52,7 +52,9 @@ public class App {
 
     if (!acertado) {
       out.println("Has agotado todos los intentos.");
-      out.println("La puerta permanece cerrada! Intentalo de nuevo.");
+      out.println("La puerta permanece cerrada! Inténtalo de nuevo.");
+    } else {
+      out.println("¡Felicidades! Has resuelto el enigma.");
     }
   }
 }

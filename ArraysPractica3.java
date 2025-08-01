@@ -14,7 +14,7 @@ public class App {
         // Variable de control de menú
         int opcion = 0;
 
-        // Menú con ciclo WHILE (como lo pidió el profe)
+        // Menú con ciclo WHILE
         while (opcion != 7) {
             out.println("\n-------------------------------");
             out.println("  Sistema de Inventarios");
